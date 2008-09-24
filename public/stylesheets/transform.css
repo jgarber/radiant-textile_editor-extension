@@ -1,0 +1,56 @@
+.transform_form {
+  width: 500px;
+}
+
+.transform_container {
+	padding: 5px 0px 12px 0px;
+}
+
+.transform_choice_container {
+	width: 150px;
+	margin: 0px;
+	float: left;
+	background-color: #d1e1fc;
+	padding-top: 6px;
+	padding-bottom: 10px;
+	height: auto;
+}
+
+.transform_choice {
+	padding: 4px;
+	font-size: 1em;
+	color: #fff;
+	width: 142px;
+	background-color: #d1e1fc;
+}
+
+.transform_choice {
+	color: #000;
+}
+
+.transform_current {
+	background: #fafaff;
+	color: #000;
+	border-right-color: #fff;
+}
+
+.transform_input_container {
+	width: 332px;
+	margin: 0px;
+	padding: 7px;
+	float: right;
+	background-color: #fafaff;
+}
+
+.add_border_container {
+	background-color: #d1e1fc;
+	border: 2px solid #C3D9FF;
+}
+
+.transform_title {
+	margin-bottom: 3px;
+}
+
+.help {
+	font-size: 0.75em;
+}
