@@ -4,13 +4,13 @@ namespace :radiant do
       
       import File.dirname(__FILE__) + "/../../vendor/textile_editor_helper/tasks/textile_editor_helper_tasks.rake"
       
-      desc "Runs the migration of the Textile With Editor extension"
+      desc "Runs the migration of the Textile Editor extension"
       task :migrate => :environment do
         require 'radiant/extension_migrator'
         if ENV["VERSION"]
-          TextileWithEditorExtension.migrator.migrate(ENV["VERSION"].to_i)
+          TextileEditorExtension.migrator.migrate(ENV["VERSION"].to_i)
         else
-          TextileWithEditorExtension.migrator.migrate
+          TextileEditorExtension.migrator.migrate
         end
       end
 
