@@ -16,7 +16,7 @@
               %label
                 %input{:type => "radio", :name => "transform_choice", :value => "email"}
                 \ Email Address
-            - if @page && @page.attachments
+            - if @page && @page.respond_to?(:attachments)
               #link_transform_choice_attachment.transform_choice
                 %label
                   %input{:type => "radio", :name => "transform_choice", :value => "attachment"}
@@ -33,7 +33,7 @@
               %p.help
                 %strong.warning Spam warning:
                 The &#8220;enkode&#8221; tag that this form inserts is the only safe way to put email addresses on the Web.  Without the protection it provides, the address is vulnerable to harvesting by spammers.
-            - if @page && @page.attachments
+            - if @page && @page.respond_to?(:attachments)
               #transform_input_attachment.transform_input{:style => "display:none;"}
                 - if @page.attachments.any?
                   = select_tag('attachment_text',  options_from_collection_for_select(@page.attachments, "filename", "filename"))

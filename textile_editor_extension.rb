@@ -11,8 +11,6 @@ class TextileEditorExtension < Radiant::Extension
   end
   
   def activate
-    # admin.tabs.add "Textile With Editor", "/admin/textile_with_editor", :after => "Layouts", :visibility => [:all]
-    
     ApplicationController.send :include, TextileEditor::Ext::ApplicationController
     [Admin::PageController, Admin::SnippetController].each do |c| 
       c.send :before_filter, :include_textile_editor_assets
@@ -25,7 +23,6 @@ class TextileEditorExtension < Radiant::Extension
   end
   
   def deactivate
-    # admin.tabs.remove "Textile With Editor"
   end
   
 end

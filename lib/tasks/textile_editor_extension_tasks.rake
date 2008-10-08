@@ -8,9 +8,9 @@ namespace :radiant do
       task :migrate => :environment do
         require 'radiant/extension_migrator'
         if ENV["VERSION"]
-          TextileWithEditorExtension.migrator.migrate(ENV["VERSION"].to_i)
+          TextileEditorExtension.migrator.migrate(ENV["VERSION"].to_i)
         else
-          TextileWithEditorExtension.migrator.migrate
+          TextileEditorExtension.migrator.migrate
         end
       end
 
