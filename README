@@ -1,3 +1,12 @@
 = Textile With Editor
 
 Places a bar above the textarea when Textile is the current input filter.
+
+== Installing:
+
+./script/extension install textile_editor
+
+It will download, run the migrations (there are none), and update the CSS and Javascript in public/.
+
+If you install the extension manually, you'll need to run:
+  rake radiant:extensions:update_all
