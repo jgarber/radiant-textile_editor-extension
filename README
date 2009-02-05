@@ -4,11 +4,6 @@ Created by Jason Garber, September, 2008.  Based on the Textile Editor Helper pl
 
 Textile Editor places a bar above the textarea when Textile is the current input filter.
 
-== Installing:
-
-If you install the extension manually, you'll need to run:
-  rake radiant:extensions:update_all
-
 == Installation
 
 ./script/extension install textile_editor
