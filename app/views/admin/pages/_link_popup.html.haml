@@ -12,10 +12,11 @@
               %label
                 %input{:type => "radio", :name => "transform_choice", :value => "web", :checked => true}
                 \ Web Address
-            #link_transform_choice_email.transform_choice
-              %label
-                %input{:type => "radio", :name => "transform_choice", :value => "email"}
-                \ Email Address
+            - if Page.instance_methods.include?("tag:enkode_mailto")
+              #link_transform_choice_email.transform_choice
+                %label
+                  %input{:type => "radio", :name => "transform_choice", :value => "email"}
+                  \ Email Address
             - if @page && @page.respond_to?(:attachments)
               #link_transform_choice_attachment.transform_choice
                 %label
@@ -28,11 +29,12 @@
               %p.help
                 %strong Not sure what to put in the box above? 
                 First, find the page on the web you want to link to. Then, copy the web address from your browser's address bar, and paste it into in the box above.
-            #transform_input_email.transform_input{:style => "display:none;"}
-              %input#email_text{:type => "text", :name => "email_text", :value => "", :size => "30"}
-              %p.help
-                %strong.warning Spam warning:
-                The &#8220;enkode&#8221; tag that this form inserts is the only safe way to put email addresses on the Web.  Without the protection it provides, the address is vulnerable to harvesting by spammers.
+            - if Page.instance_methods.include?("tag:enkode_mailto")
+              #transform_input_email.transform_input{:style => "display:none;"}
+                %input#email_text{:type => "text", :name => "email_text", :value => "", :size => "30"}
+                %p.help
+                  %strong.warning Spam warning:
+                  The &#8220;enkode&#8221; tag that this form inserts is the only safe way to put email addresses on the Web.  Without the protection it provides, the address is vulnerable to harvesting by spammers.
             - if @page && @page.respond_to?(:attachments)
               #transform_input_attachment.transform_input{:style => "display:none;"}
                 - if @page.attachments.any?

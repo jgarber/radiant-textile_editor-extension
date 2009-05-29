@@ -246,7 +246,7 @@ Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
   initializeObservers: function() {
     Event.observe($('display_text'), 'keyup', this.displayTextObserver.bindAsEventListener(this));
     Event.observe($('web_text'), 'keyup', this.copyText.bindAsEventListener(this));
-    Event.observe($('email_text'), 'keyup', this.copyText.bindAsEventListener(this));
+    if($('email_text')) Event.observe($('email_text'), 'keyup', this.copyText.bindAsEventListener(this));
   }
   
 });

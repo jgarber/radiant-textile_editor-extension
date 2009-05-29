@@ -18,3 +18,10 @@ Textile Editor places a bar above the textarea when Textile is the current input
   $ rake production radiant:extensions:textile_editor:update
 
 3) Restart your server
+
+== Compatible extensions:
+
+* enkoder_tags - for adding enkoded email addresses
+* page_attachments - for linking to attachments and including attached images
+
+Installing the RedCloth 4 gem is highly recommended since the RedCloth 3 bundled with Radiant is so buggy.  On Radiant 0.7 or higher, just gem install RedCloth.  For Radiant 0.6.9, you'll need the redcloth4 extension as well as the gem.
