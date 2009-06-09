@@ -193,6 +193,10 @@ Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
         webAddress = $('web_text');
         webAddressValue = webAddress.value;
         webAddressText = displayText.value;
+        if (webAddressValue.getHostname() == window.location.toString().getHostname()) {
+          webAddressValue = webAddressValue.gsub(RegExp('^(?:f|ht)tp(?:s)?\://([^/]+)', 'im'), '');
+          webAddressText = webAddressText.gsub(RegExp('^(?:f|ht)tp(?:s)?\://', 'im'), '');
+        }
         if (webAddressText != '') {
           textInsert = '"'+webAddressText+'":'+webAddressValue;
         }
@@ -326,3 +330,13 @@ Object.extend(Object.extend(ImagePopup.prototype,Popup.prototype), {
   }
   
 });
+
+String.prototype.getHostname = function() {
+  var re = new RegExp('^(?:f|ht)tp(?:s)?\://([^/]+)', 'im');
+  var match = this.match(re);
+  if (match) {
+    return match[1].toString();
+  } else {
+    return null;
+  }
+}
