@@ -61,7 +61,7 @@ describe "/admin/pages/edit" do
   end
 
   describe 'when page_attachments extension is installed' do
-  
+    
     it "should display attachment options in the link and image popups" do
       @attachment = mock("attachment one")
       @attachment.stub!(:filename).and_return("test.jpg")
@@ -71,10 +71,65 @@ describe "/admin/pages/edit" do
       popups_section.should have_image_popup do
         popups_section.should have_attachment_radio_button
         popups_section.should have_image_select
+        popups_section.should have_tag("option[value=?]", "test.jpg")
       end
       popups_section.should have_link_popup do
         popups_section.should have_attachment_radio_button
         popups_section.should have_attachment_select
+        popups_section.should have_tag("option[value=?]", "test.jpg")
+      end
+    end
+    
+    it "should display recursive attachment options in the link and image popups" do
+      @page = pages(:child)
+      @attachment1 = mock("attachment one")
+      @attachment1.stub!(:filename).and_return("test.jpg")
+      @attachment2 = mock("attachment two")
+      @attachment2.stub!(:filename).and_return("test2.pdf")
+      @page.stub!(:attachments).and_return([@attachment1])
+      @page.parent.stub!(:attachments).and_return([])
+      @page.parent.parent.stub!(:attachments).and_return([@attachment2])
+      assigns[:page] = @page
+      render '/admin/pages/edit'
+    
+      popups_section.should have_image_popup do
+        popups_section.should have_attachment_radio_button
+        popups_section.should have_image_select
+        popups_section.should have_tag("optgroup") do
+          with_tag("option[value=?]", "test2.pdf")
+        end
+      end
+      popups_section.should have_link_popup do
+        popups_section.should have_attachment_radio_button
+        popups_section.should have_attachment_select
+        popups_section.should have_tag("optgroup") do
+          with_tag("option[value=?]", "test2.pdf")
+        end
+      end
+    end
+    it "should display grandparent attachment options in the link and image popups when no attachments on self" do
+      @page = pages(:child)
+      @attachment = mock("attachment one")
+      @attachment.stub!(:filename).and_return("test.jpg")
+      @page.stub!(:attachments).and_return([])
+      @page.parent.stub!(:attachments).and_return([])
+      @page.parent.parent.stub!(:attachments).and_return([@attachment])
+      assigns[:page] = @page
+      render '/admin/pages/edit'
+    
+      popups_section.should have_image_popup do
+        popups_section.should have_attachment_radio_button
+        popups_section.should have_image_select
+        popups_section.should have_tag("optgroup") do
+          with_tag("option[value=?]", "test.jpg")
+        end
+      end
+      popups_section.should have_link_popup do
+        popups_section.should have_attachment_radio_button
+        popups_section.should have_attachment_select
+        popups_section.should have_tag("optgroup") do
+          with_tag("option[value=?]", "test.jpg")
+        end
       end
     end
   

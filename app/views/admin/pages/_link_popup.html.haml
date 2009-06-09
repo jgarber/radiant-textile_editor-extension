@@ -37,8 +37,8 @@
                   The &#8220;enkode&#8221; tag that this form inserts is the only safe way to put email addresses on the Web.  Without the protection it provides, the address is vulnerable to harvesting by spammers.
             - if @page && @page.respond_to?(:attachments)
               #transform_input_attachment.transform_input{:style => "display:none;"}
-                - if @page.attachments.any?
-                  = select_tag('attachment_text',  options_from_collection_for_select(@page.attachments, "filename", "filename"))
+                - if @page.self_or_ancestors_have_attachments?
+                  = select_tag('attachment_text',  option_groups_from_collection_for_select(@page.self_and_ancestors, :attachments, :title, :filename, :filename))
                   %p.help
                     %strong Should it be a PDF instead?
                     Your document will be accessible to a wider audience if you publish your Word, Powerpoint, or other document type as a PDF.

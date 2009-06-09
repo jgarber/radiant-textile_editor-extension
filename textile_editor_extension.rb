@@ -12,6 +12,8 @@ class TextileEditorExtension < Radiant::Extension
   
   def activate
     ApplicationController.send :include, TextileEditor::Ext::ApplicationController
+    Admin::PagesHelper.send :include, TextileEditor::Ext::Admin::PagesHelper
+    Page.send :include, TextileEditor::PageExtensions
     [Admin::PagesController, Admin::SnippetsController].each do |c| 
       c.send :before_filter, :include_textile_editor_assets
     end
@@ -19,7 +21,6 @@ class TextileEditorExtension < Radiant::Extension
       admin.send(controller).edit.add :main, 'admin/pages/link_popup'
       admin.send(controller).edit.add :main, 'admin/pages/image_popup'
     end
-    Admin::PagesHelper.send :include, TextileEditor::Ext::Admin::PagesHelper
   end
   
   def deactivate
