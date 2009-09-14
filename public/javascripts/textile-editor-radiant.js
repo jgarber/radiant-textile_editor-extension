@@ -57,9 +57,27 @@ Popup.prototype = {
       Event.observe(item, 'click', this.switchTransformChoice.bindAsEventListener(this));
     }.bind(this));
     
+    this.initializeAttachments();
+    
     Element.show(this.popupElement);    
   },
   
+  initializeAttachments: function() {
+    if($('transform_input_attachment')) {
+      var optgroup = $$('#transform_input_attachment select optgroup').first();
+      var extantAttachments = $$('#attachment_list li a:last-child').collect(function(s) {
+        return s.innerHTML;
+      });
+      var newAttachments = $$('div.attachment-upload input[type=file]').collect(function(e) {
+        return e.value;
+      });
+      var attachments = extantAttachments.concat(newAttachments);
+      optgroup.update(attachments.collect(function (e) {
+        return "<option value='" + e + "'>" + e + "</option>"
+      }).join("\n"));
+    }
+  },
+    
   transformationType: function() {
     var buttonGroup = this.form.transform_choice;
     if (buttonGroup.length) {
