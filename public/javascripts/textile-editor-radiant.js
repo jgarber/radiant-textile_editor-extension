@@ -64,7 +64,7 @@ Popup.prototype = {
   
   initializeAttachments: function() {
     if($('transform_input_attachment')) {
-      var optgroup = $$('#transform_input_attachment select optgroup').first();
+      var optgroup = this.popupElement.getElementsBySelector('select optgroup').first();
       var extantAttachments = $$('#attachment_list li a:last-child').collect(function(s) {
         return s.innerHTML;
       });
@@ -76,19 +76,11 @@ Popup.prototype = {
         return "<option value='" + e + "'>" + e + "</option>"
       }).join("\n"));
       if($('page_ancestor_attachments_count').value == 0 && attachments.size() == 0 ) {
-        $$('p.help.advisory').each(function(e) {
-          e.hide();
-        });
-        $$('p.help.no-files').each(function(e) {
-          e.show();
-        });
+        this.popupElement.getElementsBySelector('p.help.advisory').first().hide();
+        this.popupElement.getElementsBySelector('p.help.no-files').first().show();
       } else {
-        $$('p.help.advisory').each(function(e) {
-          e.show();
-        });
-        $$('p.help.no-files').each(function(e) {
-          e.hide();
-        });
+        this.popupElement.getElementsBySelector('p.help.advisory').first().show();
+        this.popupElement.getElementsBySelector('p.help.no-files').first().hide();
       }
     }
   },
