@@ -37,13 +37,14 @@
                   The &#8220;enkode&#8221; tag that this form inserts is the only safe way to put email addresses on the Web.  Without the protection it provides, the address is vulnerable to harvesting by spammers.
             - if @page && @page.respond_to?(:attachments)
               #transform_input_attachment.transform_input{:style => "display:none;"}
-                - if @page.self_or_ancestors_have_attachments?
-                  = select_tag('attachment_text',  option_groups_from_collection_for_select(@page.self_and_ancestors, :attachments, :title, :filename, :filename))
-                  %p.help
-                    %strong Should it be a PDF instead?
-                    Your document will be accessible to a wider audience if you publish your Word, Powerpoint, or other document type as a PDF.
-                - else
-                  %p There are no files attached to this page.  Attach one and then return here to add a link to it.
+                = hidden_field(:page, :ancestor_attachments_count)
+                = select_tag('attachment_text',  option_groups_from_collection_for_select(@page.self_and_ancestors, :attachments, :title, :filename, :filename))
+                %p.help.advisory
+                  %strong Should it be a PDF instead?
+                  Your document will be accessible to a wider audience if you publish your Word, Powerpoint, or other document type as a PDF.
+                %p.help.no-files{:style => 'display:none;'}
+                  %strong There are no files attached to this page.
+                  Attach one and then return here to add a link to it.
           %br{:clear => "all"}/
       .transform_container
         .transform_title

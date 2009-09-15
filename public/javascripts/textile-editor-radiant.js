@@ -75,6 +75,21 @@ Popup.prototype = {
       optgroup.update(attachments.collect(function (e) {
         return "<option value='" + e + "'>" + e + "</option>"
       }).join("\n"));
+      if($('page_ancestor_attachments_count').value == 0 && attachments.size() == 0 ) {
+        $$('p.help.advisory').each(function(e) {
+          e.hide();
+        });
+        $$('p.help.no-files').each(function(e) {
+          e.show();
+        });
+      } else {
+        $$('p.help.advisory').each(function(e) {
+          e.show();
+        });
+        $$('p.help.no-files').each(function(e) {
+          e.hide();
+        });
+      }
     }
   },
     

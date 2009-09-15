@@ -135,23 +135,6 @@ describe "/admin/pages/edit" do
         end
       end
     end
-  
-    it "should show a helpful message instead of a select because there are no attachments" do
-      assigns[:page].stub!(:attachments).and_return([])
-      render '/admin/pages/edit'
-    
-      popups_section.should have_image_popup do
-        popups_section.should have_attachment_radio_button
-        popups_section.should_not have_image_select
-        popups_section.should have_tag("div#image_transform_input_attachment", /There are no images attached to this page./)
-      end
-      popups_section.should have_link_popup do
-        popups_section.should have_attachment_radio_button
-        popups_section.should_not have_attachment_select
-        popups_section.should have_tag("div#transform_input_attachment", /There are no files attached to this page./)
-      
-      end
-    end
   end
 end
 

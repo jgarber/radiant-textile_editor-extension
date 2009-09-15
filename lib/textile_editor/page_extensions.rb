@@ -1,10 +1,9 @@
 module TextileEditor::PageExtensions
-  def self_or_ancestors_have_attachments?
-    return false unless self.respond_to?(:attachments)
-    ([self] + self.ancestors).each do |page|
-      return true if page.attachments.any?
+  def ancestor_attachments_count
+    return 0 unless self.respond_to?(:attachments)
+    self.ancestors.inject(0) do |count, page|
+      count + page.attachments.count
     end
-    return false
   end
   
   def self_and_ancestors
