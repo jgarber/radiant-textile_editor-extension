@@ -66,7 +66,7 @@ Popup.prototype = {
     if($('transform_input_attachment')) {
       var optgroup = this.popupElement.getElementsBySelector('select optgroup').first();
       var extantAttachments = $$('#attachment_list li a:last-child').collect(function(s) {
-        return s.innerHTML;
+        return s.href.gsub( /.*\//, "" );
       });
       var newAttachments = $$('div.attachment-upload input[type=file]').collect(function(e) {
         return e.value;
