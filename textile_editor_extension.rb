@@ -2,9 +2,8 @@
 require_dependency 'application_controller'
 
 class TextileEditorExtension < Radiant::Extension
-  version "2.1"
+  version "2.2"
   description "Places a toolbar above the textarea when Textile is the current input filter."
-  url "http://yourwebsite.com/textile_editor"
   
   define_routes do |map|
     map.connect 'admin/textile_editor/:action', :controller => 'admin/textile_editor'

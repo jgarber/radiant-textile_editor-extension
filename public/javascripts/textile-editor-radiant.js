@@ -69,7 +69,7 @@ Popup.prototype = {
         return s.href.gsub( /.*\//, "" );
       });
       var newAttachments = $$('div.attachment-upload input[type=file]').collect(function(e) {
-        return e.value;
+        return e.value.gsub(/[^A-Za-z0-9\.\-]/, '_');
       });
       var attachments = extantAttachments.concat(newAttachments);
       optgroup.update(attachments.collect(function (e) {
