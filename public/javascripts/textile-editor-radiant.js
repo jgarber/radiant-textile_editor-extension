@@ -59,7 +59,8 @@ Popup.prototype = {
     
     this.initializeAttachments();
     
-    Element.show(this.popupElement);    
+    Element.show(this.popupElement);
+    this.initializeFocus();
   },
   
   initializeAttachments: function() {
@@ -270,12 +271,17 @@ Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
 
     Element.show('transform_input_' + this.transformationType());
     Element.addClassName('transform_choice_' + this.transformationType(), 'transform_current');
+    this.initializeFocus();
   },
   
   initializeObservers: function() {
     Event.observe($('display_text'), 'keyup', this.displayTextObserver.bindAsEventListener(this));
     Event.observe($('web_text'), 'keyup', this.copyText.bindAsEventListener(this));
     if($('email_text')) Event.observe($('email_text'), 'keyup', this.copyText.bindAsEventListener(this));
+  },
+
+  initializeFocus: function() {
+    $('transform_input_' + this.transformationType()).select('select, input')[0].focus();
   }
   
 });
@@ -349,9 +355,14 @@ Object.extend(Object.extend(ImagePopup.prototype,Popup.prototype), {
 
     Element.show('image_transform_input_' + this.transformationType());
     Element.addClassName('image_transform_choice_' + this.transformationType(), 'transform_current');
+    this.initializeFocus();
   },
   
   initializeObservers: function() {
+  },
+
+  initializeFocus: function() {
+    $('image_transform_input_' + this.transformationType()).select('select, input')[0].focus();
   }
   
 });
