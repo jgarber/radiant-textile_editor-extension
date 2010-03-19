@@ -36,6 +36,6 @@
         .transform_title
           %strong 2. Alternate text:
           %input#alt_text{:type => "text", :size => "25", :name => "alt_text"}
-      %button#image-popup-submit.submit{:type=>"button"} OK
+      %input#image-popup-submit.submit{:type=>"submit", :value => "OK"}
       or
       = link_to_function('Cancel', :class => 'close-link') {|page| page.hide 'image-popup' }

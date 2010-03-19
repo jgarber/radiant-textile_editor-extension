@@ -50,6 +50,6 @@
         .transform_title
           %strong 2. Text to display: 
           %input#display_text{:type => "text", :size => "25", :name => "display_text"}
-      %button#link-popup-submit.submit{:type => "button"} OK
+      %input#link-popup-submit.submit{:type => "submit", :value => "OK"}
       or
       = link_to_function('Cancel', :class => 'close-link') {|page| page.hide 'link-popup' }

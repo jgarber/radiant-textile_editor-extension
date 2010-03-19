@@ -40,7 +40,6 @@ Popup.prototype = {
     this.textArea = $(button).canvas;
     this.popupElement = this.getPopupWindow();
     this.form = this.popupElement.getElementsBySelector('form')[0];
-    this.submit = this.popupElement.getElementsBySelector('button.submit')[0];
     this.copyLabelFromAddress = true;
     this.textSelection = this.getTextSelection();
     
@@ -52,7 +51,7 @@ Popup.prototype = {
     this.initializeObservers();
     
     // General observers
-    Event.observe(this.submit, 'click', this.transform.bindAsEventListener(this));
+    Event.observe(this.form, 'submit', this.transform.bindAsEventListener(this));
     this.popupElement.getElementsBySelector('.transform_choice input').each(function(item) {
       Event.observe(item, 'click', this.switchTransformChoice.bindAsEventListener(this));
     }.bind(this));
@@ -212,7 +211,8 @@ Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
     }
   },
   
-  transform: function() {
+  transform: function(event) {
+    Event.stop(event);
     displayText = $('display_text');
     switch(this.transformationType()) {
       case 'web':
@@ -314,7 +314,8 @@ Object.extend(Object.extend(ImagePopup.prototype,Popup.prototype), {
     }
   },
   
-  transform: function() {
+  transform: function(event) {
+    Event.stop(event);
     altText = $('alt_text').value;
     switch(this.transformationType()) {
       case 'web':
