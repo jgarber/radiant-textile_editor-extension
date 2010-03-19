@@ -32,8 +32,6 @@ function load_textile_editor(){
   });
 }
 
-
-
 var Popup = Class.create();
 Popup.prototype = {
   initialize: function(button) {
@@ -281,7 +279,9 @@ Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
   },
 
   initializeFocus: function() {
-    $('transform_input_' + this.transformationType()).select('select, input')[0].focus();
+    if (this.popupElement.visible()) {
+      $('transform_input_' + this.transformationType()).select('select, input')[0].focus();
+    }
   }
   
 });
@@ -363,8 +363,9 @@ Object.extend(Object.extend(ImagePopup.prototype,Popup.prototype), {
   },
 
   initializeFocus: function() {
-    $('image_transform_input_' + this.transformationType()).select('select, input')[0].focus();
-  }
+    if (this.popupElement.visible()) {
+      $('image_transform_input_' + this.transformationType()).select('select, input')[0].focus();
+    }  }
   
 });
 

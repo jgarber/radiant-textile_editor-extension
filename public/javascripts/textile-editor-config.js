@@ -23,80 +23,22 @@ teButtons.push(new TextileEditorButton('ed_justify',    'justify.png',       '<>
 //  Custom button additions
 // -----------------------------------------------------------
 
-// Link callback function. Adds url or mailto link
-// based on id of 'link' or 'email', respectively
-function addLink(button, id)
-{
-  var button = $(button);
-  var myField = button.canvas;
-  myField.focus();
-  
-  // Selection testing straight from textile-editor.js
-  // -----------------------------------------------------------
-  textSelected = false;
+function textileEditorPopupButton(id, display, popupClass, access, title) {
+  var theButton = document.createElement("button");
+  theButton.id = id;
+  theButton.standard = false;
 
-  // grab the text that's going to be manipulated, by browser
-  if (document.selection) { // IE support
-    sel = document.selection.createRange();
+  var img = document.createElement('img');
+  img.src = '/images/textile-editor/' + display;
+  theButton.appendChild(img);
 
-    // check if text has been selected
-    if (sel.text.length > 0) {
-      textSelected = true;  
-      var selectedText = sel.text; 
-    }
-  }
-  else if (myField.selectionStart || myField.selectionStart == '0') { // MOZ/FF/NS/S support
-
-    // figure out cursor and selection positions
-    var startPos = myField.selectionStart;
-    var endPos = myField.selectionEnd;
-  
-    // check if text has been selected
-    if (startPos != endPos) {
-      textSelected = true;
-      var selectedText = myField.value.substring(startPos, endPos); 
-    }
-  }
-  // END selection testing
-  // -----------------------------------------------------------
-
-  // Show Link dialog
-  $('transform_form').reset()
-  if (selectedText) $('display_text').value = selectedText;
-  center($('link-popup'));
-  Element.show($('link-popup'));
-  
-  // 
-  // // Prompt user
-  // switch(id) {
-  //  case 'link':
-  //    var link = prompt("Enter a URL:", "http://");
-  //    if (link == "http://" || link == "" || link == null) return false;
-  //    break;
-  //  case 'email':
-  //    var link = prompt("Enter an email address:");
-  //    if (link == "" || link == null) return false;
-  //    link = 'mailto:'+link;
-  //    break;
-  //  default:
-  //    return false;
-  //    break;
-  // }
-  // 
-  // // Set result
-  // var tagStart = '"';
-  // var tagEnd   = '":'+link; 
-  // 
-  // if (!textSelected) {
-  //   tagStart = '"Text Here":'+link+' '; // default text, nothing entered
-  //   tagEnd   = '\n';  
-  // }
-  // 
-  // TextileEditor.insertTag(button, tagStart, tagEnd);  
-  // button.className = 'unselected';
+  theButton.access = access;   // set to -1 if tag does not need to be closed
+  theButton.title = title;     // sets the title attribute of the button to give 'tool tips'
+  theButton.onclick = function() { eval("new " + popupClass + "(this)" ); return false; };
+  return theButton;
 }
 
 // Add the custom buttons
 teButtons.push(new TextileEditorButtonSeparator(''));
-teButtons.push("<button id=\"ed_link\" onclick=\"new LinkPopup(this);return false;\" accesskey=\"l\" class=\"standard\"><img src=\"/images/textile-editor/link.png\" title=\"Link\" alt=\"Link\" /></button>");
-teButtons.push("<button id=\"ed_img\" onclick=\"new ImagePopup(this);return false;\" accesskey=\"i\" class=\"standard\"><img src=\"/images/textile-editor/image.png\" title=\"Image\" alt=\"Image\" /></button>");
+teButtons.push(textileEditorPopupButton('ed_link', 'link.png',  'LinkPopup',  'l', 'Link'));
+teButtons.push(textileEditorPopupButton('ed_img',  'image.png', 'ImagePopup', 'i', 'Image'));
