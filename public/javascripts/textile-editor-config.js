@@ -23,22 +23,6 @@ teButtons.push(new TextileEditorButton('ed_justify',    'justify.png',       '<>
 //  Custom button additions
 // -----------------------------------------------------------
 
-function textileEditorPopupButton(id, display, popupClass, access, title) {
-  var theButton = document.createElement("button");
-  theButton.id = id;
-  theButton.standard = false;
-
-  var img = document.createElement('img');
-  img.src = '/images/textile-editor/' + display;
-  theButton.appendChild(img);
-
-  theButton.access = access;   // set to -1 if tag does not need to be closed
-  theButton.title = title;     // sets the title attribute of the button to give 'tool tips'
-  theButton.onclick = function() { eval("new " + popupClass + "(this)" ); return false; };
-  return theButton;
-}
-
-// Add the custom buttons
 teButtons.push(new TextileEditorButtonSeparator(''));
-teButtons.push(textileEditorPopupButton('ed_link', 'link.png',  'LinkPopup',  'l', 'Link'));
-teButtons.push(textileEditorPopupButton('ed_img',  'image.png', 'ImagePopup', 'i', 'Image'));
+teButtons.push("<button id=\"ed_link\" onclick=\"new LinkPopup(this);return false;\" accesskey=\"l\" class=\"standard\"><img src=\"/images/textile-editor/link.png\" title=\"Link\" alt=\"Link\" /></button>");
+teButtons.push("<button id=\"ed_img\" onclick=\"new ImagePopup(this);return false;\" accesskey=\"i\" class=\"standard\"><img src=\"/images/textile-editor/image.png\" title=\"Image\" alt=\"Image\" /></button>");
