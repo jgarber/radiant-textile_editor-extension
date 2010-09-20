@@ -5,10 +5,6 @@ class TextileEditorExtension < Radiant::Extension
   version "2.2"
   description "Places a toolbar above the textarea when Textile is the current input filter."
   
-  define_routes do |map|
-    map.connect 'admin/textile_editor/:action', :controller => 'admin/textile_editor'
-  end
-  
   def activate
     ApplicationController.send :include, TextileEditor::Ext::ApplicationController
     Admin::PagesHelper.send :include, TextileEditor::Ext::Admin::PagesHelper
