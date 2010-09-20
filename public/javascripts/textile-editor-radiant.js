@@ -27,7 +27,7 @@ filterObserver.prototype = {
 Event.observe(window, 'load', load_textile_editor);
 
 function load_textile_editor(){
-  parts = $$('.form-area textarea').each(function(e) {
+  parts = $$('#tab_control .pages .page textarea', '.form_area textarea').each(function(e) {
     new filterObserver(e);
   });
 }
