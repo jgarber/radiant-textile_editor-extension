@@ -32,8 +32,8 @@ function load_textile_editor(){
   });
 }
 
-var Popup = Class.create();
-Popup.prototype = {
+var TextileEditorPopup = Class.create();
+TextileEditorPopup.prototype = {
   initialize: function(button) {
     this.textArea = $(button).canvas;
     this.popupElement = this.getPopupWindow();
@@ -175,9 +175,9 @@ Popup.prototype = {
   }
 }
 
-// Subclass of Popup specifically for adding links
+// Subclass of TextileEditorPopup specifically for adding links
 var LinkPopup = Class.create();
-Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
+Object.extend(Object.extend(LinkPopup.prototype,TextileEditorPopup.prototype),{
   getPopupWindow: function() {
     return $('link-popup');
   },
@@ -288,7 +288,7 @@ Object.extend(Object.extend(LinkPopup.prototype,Popup.prototype),{
 
 // Subclass of Popup specifically for adding images
 var ImagePopup = Class.create();
-Object.extend(Object.extend(ImagePopup.prototype,Popup.prototype), {
+Object.extend(Object.extend(ImagePopup.prototype,TextileEditorPopup.prototype), {
   getPopupWindow: function() {
     return $('image-popup');
   },
